@@ -1,4 +1,4 @@
-import { useStore } from '@/context/DemoStore.js'
+import { useStore } from '@/context/DemoStore'
 
 export default function () {
   const { store } = useStore()

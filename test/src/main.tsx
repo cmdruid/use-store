@@ -5,7 +5,7 @@ import App      from './App.js'
 import './styles/global.css'
 import './styles/dark.css'
 
-import { StoreProvider } from './context/DemoStore.js'
+import { StoreProvider } from '@/context/DemoStore'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

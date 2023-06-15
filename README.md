@@ -48,7 +48,7 @@ The next step is to wrap your react app with the store provider:
 ```tsx
 // Example base app for react / nextjs.
 // Your project may look slightly different.
-import { StoreProvider } from './context/DemoStore.tsx'
+import { StoreProvider } from './src/context/DemoStore.js'
 
 export default function App ({ Component, pageProps }) {
   return (
@@ -64,7 +64,7 @@ With the `StoreProvider` configured, importing the store is relatively simple.
 Here is a basic example of reading from the store:
 
 ```tsx
-import { useStore } from '@/context/DemoStore.js'
+import { useStore } from './src/context/DemoStore.js'
 
 export default function View () {
   const { store } = useStore()
@@ -82,7 +82,7 @@ Here is an example of updating and resetting the store:
 
 ```tsx
 import { useState } from 'react'
-import { useStore } from '@/context/DemoStore.js'
+import { useStore } from './src/context/DemoStore.js'
 
 export default function Post () {
   const [ text, setText ] = useState('')
