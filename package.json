@@ -3,10 +3,10 @@
   "author": "Christopher Scott",
   "description": "Simple reducer for storing data across your react app.",
   "license": "CC-BY-1.0",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
