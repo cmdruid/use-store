@@ -2,8 +2,8 @@ import { useReducer } from 'react'
 
 // We can strictly type our dispatch actions here.
 export type Action<T> =
-  | { type : 'reset',  payload : T }
-  | { type : 'update', payload : Partial<T> }
+  | { type: 'reset',  payload: T }
+  | { type: 'update', payload: Partial<T> }
 
 function reducer<T> (
   store  : T,
