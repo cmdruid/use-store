@@ -8,4 +8,4 @@ const defaults : DemoStore = {
   posts : []
 }
 
-export const { StoreProvider, useStore } = createStore(defaults)
+export const { StoreProvider, useStore } = createStore(defaults, 'test2')

@@ -6,22 +6,22 @@ import {
 
 import { initStore } from './store.js'
 
-interface Props {
-  children  : ReactElement
-}
-
+export type StoreProps  = { children : ReactElement }
 export type StoreAPI<T> = ReturnType<typeof initStore<T>>
 
-export function createStore<T> (defaults : T) {
+export function createStore<T> (
+  defaults   : T,
+  cache_key ?: string
+) {
   // Create our provider context.
   const context = createContext<StoreAPI<T> | null>(null)
 
   function StoreProvider (
-    { children } : Props
+    { children } : StoreProps
   ) : ReactElement {
     // Returns the Provider that wraps our app and
     // passes down the context object.
-    const ctx = initStore(defaults)
+    const ctx = initStore(defaults, cache_key)
 
     return (
       <context.Provider value={ctx}>
