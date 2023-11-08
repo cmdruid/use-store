@@ -39,8 +39,12 @@ const defaults : DemoStore = {
   posts : []
 }
 
+// If you would like the store to be cached in the browser's 
+// session storage, define an optional key for the store.
+const session_key = 'my_unique_key'
+
 // Export the provider and store hook for use in your app.
-export const { StoreProvider, useStore } = createStore(defaults)
+export const { StoreProvider, useStore } = createStore(defaults, session_key)
 ```
 
 The next step is to wrap your react app with the store provider:

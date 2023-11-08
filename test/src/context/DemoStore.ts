@@ -8,4 +8,6 @@ const defaults : DemoStore = {
   posts : []
 }
 
-export const { StoreProvider, useStore } = createStore(defaults, 'test2')
+const key = 'my_unique_key'
+
+export const [ StoreProvider, useStore ] = createStore(defaults, key)

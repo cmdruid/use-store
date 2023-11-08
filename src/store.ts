@@ -6,28 +6,22 @@ export type Action<T> =
   | { type: 'reset',  payload: T          }
   | { type: 'update', payload: Partial<T> }
 
-export type Cacher<T> = (value: T) => void
-
-
-
 export function initStore<T> (
-  defaults   : T,
-  cache_key ?: string
+  defaults     : T,
+  session_key ?: string
 ) {
   /**
    * Create a reducer store with custom hooks, then
    * return it along with our Store API.
    */
-  let cacher : Cacher<T> | undefined,
+  let cacher : (value: T) => void | undefined,
       data   : T = defaults
 
-  if (cache_key !== undefined) {
-    const [ session, setSession ] = useSessionStore(cache_key, defaults)
-    cacher    = setSession
-    data      = session
+  if (session_key !== undefined) {
+    const [ session, setSession ] = useSessionStore(session_key, defaults)
+    cacher = setSession
+    data   = session
   }
-
-  console.log('session:', data)
 
   function reducer (
     store  : T,
