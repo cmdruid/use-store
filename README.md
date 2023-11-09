@@ -27,7 +27,7 @@ Here is an example of how to create a demo store:
 
 ```tsx
 // Import the package.
-import { createStore } from '@cmdcode/use-store'
+import { createStore, StoreAPI } from '@cmdcode/use-store'
 
 // Setup your own custom Store interface.
 export interface DemoStore {
@@ -39,12 +39,19 @@ const defaults : DemoStore = {
   posts : []
 }
 
-// If you would like the store to be cached in the browser's 
-// session storage, define an optional key for the store.
+// Optional: If you would like to return a custom store object, use a
+// middleware method that takes the default store and returns a custom store.
+const middleware = (store : StoreAPI<DemoStore>) => {
+  const say_hello = () => console.log('hello world!')
+  return { ...store, say_hello }
+}
+
+// Optional: If you would like the store to be cached in the browser's 
+// session storage, define a key for the session store.
 const session_key = 'my_unique_key'
 
 // Export the provider and store hook for use in your app.
-export const { StoreProvider, useStore } = createStore(defaults, session_key)
+export const { StoreProvider, useStore } = createStore({ defaults, middleware, session_key })
 ```
 
 The next step is to wrap your react app with the store provider:
