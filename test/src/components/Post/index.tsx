@@ -7,7 +7,6 @@ export default function () {
 
   const submit = () => {
     const posts = [ ...store.posts, text ]
-    console.log(posts)
     update({ posts })
   }
 
