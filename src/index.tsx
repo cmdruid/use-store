@@ -1,11 +1,11 @@
+import { useStoreCache } from './cache.js'
+import { create_store }  from './store.js'
+
 import {
   createContext,
   ReactElement,
   useContext
 } from 'react'
-
-import { useStoreCache } from './cache.js'
-import { create_store }  from './store.js'
 
 type Props = { children : ReactElement }
 
@@ -52,7 +52,7 @@ function create_provider<T, R = StoreAPI<T>> (
     }
   }
 
-  return [ StoreProvider, useStore ]
+  return { StoreProvider, useStore }
 }
 
 export { create_store, create_provider, useStoreCache }
