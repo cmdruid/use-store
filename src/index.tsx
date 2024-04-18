@@ -4,22 +4,23 @@ import {
   useContext
 } from 'react'
 
-import { initStore } from './store.js'
+import { useStoreCache } from './cache.js'
+import { create_store }  from './store.js'
 
 type Props = { children : ReactElement }
 
 interface StoreConfig <T, R> {
-  defaults     : T
-  middleware  ?: (store : StoreAPI<T>) => R
-  session_key ?: string
+  defaults    : T
+  middleware ?: (store : StoreAPI<T>) => R
+  store_key  ?: string
 }
 
-export type StoreAPI<T> = ReturnType<typeof initStore<T>>
+export type StoreAPI<T> = ReturnType<typeof create_store<T>>
 
-export function createStore<T, R = StoreAPI<T>> (
+function create_provider<T, R = StoreAPI<T>> (
   config : StoreConfig<T, R>
 ) {
-  const { defaults, middleware, session_key } = config
+  const { defaults, middleware, store_key } = config
 
   // Create our provider context.
   const context = createContext<R | null>(null)
@@ -29,7 +30,7 @@ export function createStore<T, R = StoreAPI<T>> (
   ) : ReactElement {
     // Returns the Provider that wraps our app and
     // passes down the context object.
-    const store = initStore(defaults, session_key)
+    const store = create_store(defaults, store_key)
 
     const ctx = (typeof middleware === 'function')
       ? middleware(store)
@@ -51,5 +52,7 @@ export function createStore<T, R = StoreAPI<T>> (
     }
   }
 
-  return { StoreProvider, useStore }
+  return [ StoreProvider, useStore ]
 }
+
+export { create_store, create_provider, useStoreCache }

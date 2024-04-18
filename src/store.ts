@@ -1,14 +1,15 @@
-import { useReducer } from 'react'
-import useSessionStore from './session.js'
+import { useReducer }    from 'react'
+import { StoreType, useStoreCache } from './cache.js'
 
 // We can strictly type our dispatch actions here.
 export type Action<T> =
   | { type: 'reset',  payload: T          }
   | { type: 'update', payload: Partial<T> }
 
-export function initStore<T> (
-  defaults     : T,
-  session_key ?: string
+export function create_store<T> (
+  defaults    : T,
+  store_key  ?: string,
+  store_type ?: StoreType
 ) {
   /**
    * Create a reducer store with custom hooks, then
@@ -17,10 +18,10 @@ export function initStore<T> (
   let cacher : (value: T) => void | undefined,
       data   : T = defaults
 
-  if (session_key !== undefined) {
-    const [ session, setSession ] = useSessionStore(session_key, defaults)
-    cacher = setSession
-    data   = session
+  if (store_key !== undefined) {
+    const [ cache, setCache ] = useStoreCache(store_key, defaults, store_type)
+    cacher = setCache
+    data   = cache
   }
 
   function reducer (
