@@ -31,10 +31,11 @@ export function create_store<T> (
     const { type, payload } = action
     switch (type) {
       case 'reset':
+        const reset_store = { ...defaults, ...payload }
         if (cacher !== undefined) {
-          cacher(payload)
+          cacher(reset_store)
         }
-        return payload
+        return reset_store
       case 'update':
         const new_store = { ...store, ...payload }
         if (cacher !== undefined) {
